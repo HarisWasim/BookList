@@ -1,0 +1,469 @@
+/*changes*/
+/*
+	NOTES
+	The CSS code before our media queries will define
+		the landing page on desktop.
+	For compatability with flexbox,
+		Jose will to avoid padding.
+
+	SECTIONS
+	fonts
+	header
+	main
+*/
+
+
+
+/*SECTION: fonts*/
+
+/*defaults for all text elements*/
+.text
+{
+	font-family: 'Roboto',
+		'Lucida Sans', 'Lucida Sans Regular',
+		'Lucida Grande', 'Lucida Sans Unicode',
+		Geneva, Verdana, sans-serif;
+	
+	font-size: 14pt;/*small font*/
+	font-weight: 300;/*light font*/
+	color: #4A73FF;
+
+	line-height: 1.4em;
+}
+/*big font elements*/
+#site-titles .title
+{
+	font-size: 24pt;
+}
+/*medium font elements*/
+#search-form-title,
+.tile .book-title,
+.tile .book-author
+{
+	font-size: 18pt;
+}
+/*bold font elements*/
+#site-titles .title,
+.or-separator,
+.tile .book-title,
+#not-found-message b
+{
+	font-weight: 700;
+}
+/*regular font elements*/
+.std-button
+{
+	/*regular font is reserved for std-button elements*/
+	font-weight: 400;
+}
+/* black font items */
+.tile .text
+{
+	color: #000000;
+}
+/* white font items */
+#book-not-found-popup .text,
+.std-button
+{
+	color: #FFFFFF;
+}
+
+
+
+/*SECTION: element arrangment & styling*/
+
+/*standard element classes*/
+.template
+{
+	/* display: none; */
+}
+.std-button
+{
+	background-color: #4A73FF;
+	border-radius: 10px;
+
+	box-sizing: border-box;
+	width: 150px;
+	height: 40px;
+}
+.x-button
+{
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+
+	position: relative;
+	top: 5px;
+	right: 5px;
+}
+#overlay .x-button{
+	position: absolute;
+}
+
+#bookDisplay .x-button
+{
+	border-color: #000000;
+	color: #000000;
+}
+#overlay .x-button
+{
+	border-color: #FFFFFF;
+	color: #FFFFFF;
+}
+#search-icon
+{
+	display: none;
+	/* appears in mobile */
+}
+#bookDisplay .tile{
+	height: 
+}
+
+.tile
+{
+	background-color: #FFFFFF;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+.tile div
+{
+	/* the two div containers in the tile */
+	width: 40%;
+	height: 80%;
+	margin: 10% 0% 10% 0%;
+}
+.tile .container-above-book-cover
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+.tile .book-cover
+{
+	max-height: 100%;
+	max-width: 100%;
+}
+.tile .book-details
+{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.tile .book-details .text
+{
+	/*
+	All items in .book-details will
+		have some spacing between themselves
+	*/
+	margin-bottom: 5%;
+}
+
+/*content*/
+html, body
+{
+	width: 100%;
+
+	background-color: #FFFFFF;
+}
+body
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+header
+{
+	/*
+	Initially, header takes up entire viewport.
+	*/
+	height: 100vh;
+		/* 100% of viewport height */
+	width: 100vw;
+		/* 100% of viewport width */
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#container-below-header
+{
+	width: 90%;
+	height: 90%;
+	margin: 5%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+#site-titles
+{
+	height: 10%;
+		/* adds up to 100% with container-above-search-form */
+}
+
+#container-above-search-form
+{
+	width: 100%;
+	height: 90%;
+		/* adds up to 100% with container-above-search-form */
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+#search-form
+{
+	box-sizing: border-box;
+	width: 80%;
+	/*height should fit contents*/
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+/* all elements inside #search-form */
+#search-form-title,
+#inputs,
+#container-above-search-button
+{
+	margin-bottom: 2.5%;
+}
+#inputs
+{
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+#inputs .input-and-label
+{
+	overflow: hidden;
+
+}
+
+/*
+	3 .input-and-label elements and
+	2 .container-above-or-separator elements
+	are the only children of #inputs
+*/
+.input-and-label
+{
+	width: auto;
+}
+.container-above-or-separator
+{
+	width: 5%;
+}
+
+.input-and-label .input
+{
+	box-sizing: border-box;
+}
+.input-and-label .input,
+.input-and-label .label
+{
+	width: auto;
+}
+.input
+{
+	border-style: solid;
+	border-color: #4A73FF;
+	box-sizing: border-box;
+}
+#container-above-search-button
+{
+	box-sizing: border-box;
+}
+
+#overlay
+{
+	/*display: none*/
+	display: none;
+		/* for now, set to flex
+		so that I can see what I'm coding up */
+	display: none;
+
+	/* Full-window container ... */
+    position: fixed; 
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* ... floating above everything else ... */
+    z-index: 2;
+
+    /* ... with partial transparency, 
+           to make everything else look greyed out */
+    background-color: rgba(0,0,0,0.5);
+
+    /* Flex options for child objects */
+	flex-direction: column;
+	align-items: center;
+    justify-content: center;
+}
+.popup
+{
+	width: 85%;
+	height: 80%;
+}
+#book-found-popup
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+#tile-and-arrows
+{
+	width: 100%;
+	height: 75%;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.arrow-button
+{
+	width: 10%;
+	height: 10%;
+}
+#popup-tile
+{
+	width: 70%;
+	height: 100%;
+}
+#template-tile
+{
+	display: none;
+}
+#book-not-found-popup
+{
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+#not-found-message
+{
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/*header,*/
+main
+{
+	width: 100%;
+	/*min-height: 100vh;*/ /* main appears after user selects something */
+		/* change back to 0% after done looking at main */
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 1 0 auto;
+		/* the sticky footer trick without the footer */
+		/* This is Amenta's Code */
+}
+#bookDisplay
+{
+	/* take up entire main */
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+
+	background-color: #EDEDED;
+}
+#bookDisplay .tile
+{
+	width: 30%;
+	margin: 1.66%;
+}
+/*header,*/
+#overlay
+{
+	/* for looking at main*/
+	/*display: none;*/
+}
+
+#errorOverlay{
+	
+
+	/* Full-window container ... */
+    position: fixed; 
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* ... floating above everything else ... */
+    z-index: 2;
+
+    /* ... with partial transparency, 
+           to make everything else look greyed out */
+    background-color: rgba(0,0,0,0.5);
+
+    /* Flex options for child objects */
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+
+@media(max-width: 600px){
+	#inputs{
+		display: block;
+	}
+	#inputs .input-and-label{
+		overflow: initial;
+	}
+	i{
+		display: none;
+	}
+	#bookDisplay{
+		flex-direction: column;
+	}
+
+	#bookDisplay .tile{
+		width: 90%;
+	}
+	.book-details .text{
+		font-size: 12px;
+	}
+}
+
+@media(min-width: 601px){
+	#search-icon{
+		display: none !important;
+	}
+	#bookDisplay{
+		flex-direction: row;
+	}
+}
