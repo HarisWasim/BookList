@@ -1,0 +1,222 @@
+<!doctype HTML>
+<html>
+<head>
+    <title>
+        Make a Book List
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="bookclub.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+        integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+        crossorigin="anonymous">
+        <script src="bookclub.js">
+        </script>
+
+</head>
+<!--test-->
+<!--
+    RECURRING CLASSES:
+    "container"
+        These are <div> elements placed
+            immediately 'above' or 'below' an element.
+        They only serve to help with arranging their contents.
+        They don't have functionality by themselves.
+        Their id's are "container-above-..." or "container-below-..."
+            where ... is the id of the element they are above/below.
+    "text"
+        These are elements that IMMEDIATELY contain text.
+        They are NOT elements that contain
+            other elements that contain text.
+        This allows us to give default font attributes easily.
+    "std-button"
+        The standard button with text.
+        They should all be the same size and
+            have the same font.
+    "x-button"
+        The close button.
+-->
+<body>
+    <!--
+        The header takes up the entire landing page.
+        Initially, <main> & <footer> are hidden.
+        Once books are selected, the tiles will come up
+            in the <main>.
+    -->
+    <header>
+        <i id="search-icon" class="fas fa-search"></i>
+        <div id="container-below-header" class="container">
+            <div id="site-titles">
+                <h1 class="title text">
+                    Book Club
+                </h1>
+                <!-- insert potential subtitles here -->
+            </div>
+            <div id="container-above-search-form" class="container">
+                <div id="search-form">
+                    <h2 id="search-form-title" class="title text">
+                        Search for a book by ...
+                    </h2>
+                    <div id="inputs">
+                        <div id="author-input-and-label" class="input-and-label">
+                            <h3 id="author-label" class="label text">
+                                Author
+                            </h3>
+                            <input id="author-input" placeholder="Author"
+                              class="input text">
+                        </div>
+                        <div id="container-above-or-separator-1"
+                          class="container-above-or-separator container">
+                            <h3 id="or-separator-1" class="or-separator text">
+                                or
+                            </h3>
+                        </div>
+                        <div id="title-input-and-label" class="input-and-label">
+                            <h3 id="title-label" class="label text">
+                                Title
+                            </h3>
+                            <input id="title-input" placeholder="Title"
+                              class="input text">
+                        </div>
+                        <div id="container-above-or-separator-2"
+                          class="container-above-or-separator container">
+                            <h3 id="or-separator-2" class="or-separator text">
+                                or
+                            </h3>
+                        </div>
+                        <div id="isbn-input-and-label" class="input-and-label">
+                            <h3 id="isbn-label" class="label text">
+                                ISBN
+                            </h3>
+                            <input id="isbn-input" placeholder="000-0-00-000000-0"
+                              class="input text">
+                        </div>
+                    </div>
+                    <div id="container-above-search-button" class="container">
+                        <button onclick="newRequest();" class="std-button text">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="overlay">
+        <button class="x-button" onclick="closeOverlay();">
+            ×
+        </button>
+        <div id="book-found-popup" class="popup">
+            <div id="tile-and-arrows">
+                <button class="left-arrow-button arrow-button"
+                  onclick="nextBook('left');">
+                </button>
+                <div id="popup-tile" class="tile">
+                    <div class="container-above-book-cover">
+                        <!--
+                            container-above-book-cover (and others below)
+                                is a class (instead of an id)
+                                because this format will be used again in the <main>
+                                when books are selected.
+                        -->
+                        <img class="book-cover"
+                          src="dummyCover.jpg"
+                          title="dummy title"
+                          alt="dummy alt">
+                            <!-- will be filled by javascript. -->
+                    </div>
+                    <div class="book-details">
+                        <h1 class="book-title text">
+                            &lt to be entered &gt
+                        </h1>
+                        <h2 class="book-author text">
+                            by &lt to be entered &gt
+                        </h2>
+                        <p class="book-description text">
+                            &lt to be entered &gt
+                        </p>
+                    </div>
+                </div>
+                <button class="right-arrow-button arrow-button"
+                  onclick="nextBook('right');">
+                </button>
+            </div>
+            <button id="keep-button" class="std-button text"
+              onclick="keepBook();">
+                Keep
+            </button>
+        </div>
+        <div id="book-not-found-popup" class="popup">
+            <!--
+            <p id="not-found-message" class="text">
+                The book
+                <b id="not-found-title" class="text">
+                    &lt to be entered &gt
+                </b>
+                by
+                <b id="not-found-author" class="text">
+                    &lt to be entered &gt
+                </b>
+                with ISBN number
+                <b id="not-found-isbn" class="text">
+                    &lt to be entered &gt
+                </b>
+                could not be found.
+                <br>
+                Try another search.
+            </p>
+            -->
+            <button id="not-found-ok-button" class="std-button text">
+                OK
+            </button>
+        </div>
+    </div>
+    <main>
+        <div id="bookDisplay">
+            <!--
+                Delete later if warranted.
+                This is just for testing with Amenta's untouched code.
+                    It assumes a <div> with id="bookDisplay exists"
+            -->
+            <div id="template-tile" class="tile template">
+                <button class="x-button" onclick="">
+                        ×
+                </button>
+                <div class="container-above-book-cover">
+                    <!--
+                        container-above-book-cover (and others below)
+                            is a class (instead of an id)
+                            because this format will be used again in the <main>
+                            when books are selected.
+                    -->
+                    <img class="book-cover"
+                      src="dummyCover.jpg"
+                      title="dummy title"
+                      alt="dummy alt">
+                        <!-- will be filled by javascript. -->
+                </div>
+                <div class="book-details">
+                    <h1 class="book-title text">
+                        &lt to be entered &gt
+                    </h1>
+                    <h2 class="book-author text">
+                        by &lt to be entered &gt
+                    </h2>
+                    <p class="book-description text">
+                        &lt to be entered &gt
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- The Javascript for this page -->
+    
+
+    <!-- The JSONp request -->
+    <script id="dummy">
+    </script>  
+</body>
+</html>
